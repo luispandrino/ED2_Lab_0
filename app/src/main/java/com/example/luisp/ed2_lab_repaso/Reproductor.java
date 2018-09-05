@@ -46,15 +46,15 @@ public class Reproductor extends AppCompatActivity {
 
         library = new TreeMap<Integer, Cancion>();
         library.put(1,new Cancion("Enter Sandman", "Metallica","05:31"));
-        library.put(2,new Cancion("Master of Pupets", "Metallica","05:31"));
-        library.put(3,new Cancion("One", "Metallica","05:31"));
-        library.put(4,new Cancion("Devil Dance", "Metallica","05:31"));
-        library.put(5,new Cancion("Seek and Destroy", "Metallica","05:31"));
-        library.put(6,new Cancion("Fade to Black", "Metallica","05:31"));
-        library.put(7,new Cancion("Battery", "Metallica","05:31"));
-        library.put(8,new Cancion("The Unforgiven", "Metallica","05:31"));
-        library.put(9,new Cancion("The end of the line", "Metallica","05:31"));
-        library.put(10,new Cancion("Atlas Rise", "Metallica","05:31"));
+        library.put(2,new Cancion("Master of Pupets", "Metallica","08:35"));
+        library.put(3,new Cancion("One", "Metallica","07:23"));
+        library.put(4,new Cancion("Devils Dance", "Metallica","05:19"));
+        library.put(5,new Cancion("Seek and Destroy", "Metallica","06:52"));
+        library.put(6,new Cancion("Fade to Black", "Metallica","06:57"));
+        library.put(7,new Cancion("Battery", "Metallica","05:12"));
+        library.put(8,new Cancion("The Unforgiven", "Metallica","06:26"));
+        library.put(9,new Cancion("The end of the line", "Metallica","07:52"));
+        library.put(10,new Cancion("Atlas Rise", "Metallica","06:28"));
 
         adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.custom, Playlist);
         list.setAdapter(adapter);
