@@ -28,7 +28,7 @@ public class Reproductor extends AppCompatActivity {
         list = (ListView) findViewById(R.id.lstPlay);
         Playlist = new ArrayList<String>();
 
-        adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item, Playlist);
+        adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.custom, Playlist);
         list.setAdapter(adapter);
 
         Btn.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +36,7 @@ public class Reproductor extends AppCompatActivity {
             public void onClick(View v) {
                 Playlist.add(Txt.getText().toString());
                 adapter.notifyDataSetChanged();
+                Txt.setText("");
             }
         });
 
