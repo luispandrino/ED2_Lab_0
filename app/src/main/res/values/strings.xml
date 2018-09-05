@@ -3,4 +3,8 @@
     <string name="bienvenido_a_su_reproductor">Bienvenido a su Reproductor</string>
     <string name="ingrese_el_nombre_de_la_canci_n_que_desea_buscar">Ingrese el nombre de la canción que desea buscar</string>
     <string name="buscar">Buscar</string>
+    <string name="agregar">Agregar</string>
+    <string name="ascendente">Ascendente</string>
+    <string name="descendente">Descendente</string>
+    <string name="ordenar">Ordenar</string>
 </resources>
