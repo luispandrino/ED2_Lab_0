@@ -2,6 +2,7 @@ package com.example.luisp.ed2_lab_repaso;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,16 +13,19 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class Reproductor extends AppCompatActivity {
 
     private Button Btn;
     private Button BtnAdd;
     private Button BtnSort;
-    private RadioButton RbAsc;
     private RadioButton RbDesc;
+    private RadioButton SortTime;
     private EditText Txt;
     private ListView list;
     private ArrayAdapter<String> adapter;
@@ -30,6 +34,8 @@ public class Reproductor extends AppCompatActivity {
     private boolean Flag;
     private int song;
     private int i;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +43,8 @@ public class Reproductor extends AppCompatActivity {
         Btn = (Button) findViewById(R.id.btnBuscar);
         BtnAdd=(Button) findViewById(R.id.BtnAgregar);
         BtnSort = (Button) findViewById(R.id.BtnOrdenar);
-        RbAsc = (RadioButton) findViewById(R.id.RbA);
         RbDesc = (RadioButton) findViewById(R.id.RbD);
+        SortTime = (RadioButton) findViewById(R.id.RbSortTime);
         Txt = (EditText)findViewById(R.id.txtBuscar);
         list = (ListView) findViewById(R.id.lstPlay);
         Playlist = new ArrayList<String>();
@@ -96,6 +102,48 @@ public class Reproductor extends AppCompatActivity {
             }
         });
 
+        BtnSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (RbDesc.isChecked()){
+                    if (RbDesc.isChecked() && SortTime.isChecked()){
+
+                            Collections.sort(Playlist, new Comparator<String>() {
+                                @Override
+                                public int compare(String o1, String o2) {
+                                    String Song1 = o1.substring(o1.indexOf("/")+1);
+                                    String Song2 = o2.substring(o2.indexOf("/")+1);
+                                    return Song2.compareTo(Song1);
+                                }
+                            });
+                        adapter.notifyDataSetChanged();
+
+                    }
+                    InverseSort();
+                    adapter.notifyDataSetChanged();
+
+                }
+
+                if(SortTime.isChecked())
+                {
+                    Collections.sort(Playlist, new Comparator<String>() {
+                        @Override
+                        public int compare(String o1, String o2) {
+                            String Song1 = o1.substring(o1.indexOf("/")+1);
+                            String Song2 = o2.substring(o2.indexOf("/")+1);
+                            return Song1.compareTo(Song2);
+                        }
+                    });
+                    adapter.notifyDataSetChanged();
+                }
+                if (!RbDesc.isChecked() && !SortTime.isChecked()){
+                    Sort();
+                    adapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+
 
 
     }
@@ -111,6 +159,35 @@ public class Reproductor extends AppCompatActivity {
 
                     }
                 }).create().show();
+    }
+
+
+    public void Sort(){
+        Collections.sort(Playlist, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                String Song1 = o1.substring(0,o1.indexOf("/"));
+                String Song2 = o2.substring(0,o2.indexOf("/"));
+                return Song1.compareTo(Song2);
+            }
+        });
+
+        adapter.notifyDataSetChanged();
+    }
+
+    public void InverseSort()
+    {
+        Collections.sort(Playlist, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                String Song1 = o1.substring(0,o1.indexOf("/"));
+                String Song2 = o2.substring(0,o2.indexOf("/"));
+                return Song2.compareTo(Song1);
+            }
+        });
+
+        adapter.notifyDataSetChanged();
+
     }
 
 }
