@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -108,32 +109,20 @@ public class Reproductor extends AppCompatActivity {
                 if (RbDesc.isChecked()){
                     if (RbDesc.isChecked() && SortTime.isChecked()){
 
-                            Collections.sort(Playlist, new Comparator<String>() {
-                                @Override
-                                public int compare(String o1, String o2) {
-                                    String Song1 = o1.substring(o1.indexOf("/")+1);
-                                    String Song2 = o2.substring(o2.indexOf("/")+1);
-                                    return Song2.compareTo(Song1);
-                                }
-                            });
+                        TimeInverseSort();
                         adapter.notifyDataSetChanged();
-
                     }
-                    InverseSort();
-                    adapter.notifyDataSetChanged();
+                    else{
+                        InverseSort();
+                        adapter.notifyDataSetChanged();
+                    }
+
 
                 }
 
-                if(SortTime.isChecked())
+                if(SortTime.isChecked() && !RbDesc.isChecked())
                 {
-                    Collections.sort(Playlist, new Comparator<String>() {
-                        @Override
-                        public int compare(String o1, String o2) {
-                            String Song1 = o1.substring(o1.indexOf("/")+1);
-                            String Song2 = o2.substring(o2.indexOf("/")+1);
-                            return Song1.compareTo(Song2);
-                        }
-                    });
+                    TimeSort();
                     adapter.notifyDataSetChanged();
                 }
                 if (!RbDesc.isChecked() && !SortTime.isChecked()){
@@ -188,6 +177,30 @@ public class Reproductor extends AppCompatActivity {
 
         adapter.notifyDataSetChanged();
 
+    }
+
+    public void TimeSort(){
+        Collections.sort(Playlist, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                String Song1 = o1.substring(o1.indexOf("/")+1);
+                String Song2 = o2.substring(o2.indexOf("/")+1);
+                return Song1.compareTo(Song2);
+            }
+        });
+        adapter.notifyDataSetChanged();
+    }
+
+    public void TimeInverseSort(){
+        Collections.sort(Playlist, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                String Song1 = o1.substring(o1.indexOf("/")+1);
+                String Song2 = o2.substring(o2.indexOf("/")+1);
+                return Song2.compareTo(Song1);
+            }
+        });
+        adapter.notifyDataSetChanged();
     }
 
 }
